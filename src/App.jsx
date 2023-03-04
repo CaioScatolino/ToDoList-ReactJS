@@ -57,28 +57,28 @@ export function App() {
         <Header />
       </header>
 
-      <form class="adicionarTask" onSubmit={handleCreateNewTask}>
+      <form className="adicionarTask" onSubmit={handleCreateNewTask}>
         <input
-          class="inputTask"
+          className="inputTask"
           type="text"
           placeholder="Adicione uma nova tarefa"
           onChange={handleNewTaskChange}
           value={newTaskText}
           required
         />
-        <button class="botaoEnviar" type="submit">
+        <button className="botaoEnviar" type="submit">
           {" "}
           <span>Criar</span> <PlusCircle size={16} />{" "}
         </button>
       </form>
 
-      <div class="resumoTask">
-        <div class="statusTask">
-          <div class="criadas">
+      <div className="resumoTask">
+        <div className="statusTask">
+          <div className="criadas">
             <p>Tarefas Criadas</p> <span>{tasks.length}</span>
           </div>
 
-          <div class="concluidas">
+          <div className="concluidas">
             <p>Concluídas</p>{" "}
             <span>
               {" "}
