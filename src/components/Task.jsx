@@ -16,8 +16,6 @@ export function Task({
   function handleCompleteTask() {
     onCompleteTask(id);
   }
-
-  console.log(isComplete);
   return (
     <div className={styles.task}>
       <label className={styles.container}>
@@ -33,7 +31,7 @@ export function Task({
       <p className={isComplete ? styles.concludedTask : styles.pendingTask}>
         {content}
       </p>
-      <button onMouseDown={handleDeleteTask}>
+      <button className={styles.trashButton} onMouseDown={handleDeleteTask}>
         <Trash size={16} />
       </button>
     </div>

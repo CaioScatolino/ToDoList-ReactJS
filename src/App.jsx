@@ -3,14 +3,11 @@ import { useState } from "react";
 import { Header } from "./components/Header";
 // import reactLogo from './assets/react.svg'
 import { Task } from "./components/Task";
-import styles from "./App.module.css";
-import { v4 as uuidv4 } from "uuid";
 import "./global.css";
 import "./taskForm.css";
 
 export function App() {
   const [tasks, setTasks] = useState([]);
-  const [taskState, setTaskState] = useState(false);
 
   const [newTaskText, setNewTaskText] = useState("");
 
@@ -44,8 +41,15 @@ export function App() {
     const newTasks = tasks.map((task) =>
       task.id === id ? { ...task, isComplete: !task.isComplete } : task
     );
-    setTasks(newTasks)
+    setTasks(newTasks);
   }
+
+  let count = 0;
+  tasks.map((task) => {
+    if (task.isComplete === true) {
+      count++;
+    }
+  });
 
   return (
     <div>
@@ -75,7 +79,11 @@ export function App() {
           </div>
 
           <div class="concluidas">
-            <p>Concluídas</p> <span> 0 de {tasks.length}</span>
+            <p>Concluídas</p>{" "}
+            <span>
+              {" "}
+              {count} de {tasks.length}
+            </span>
           </div>
         </div>
 

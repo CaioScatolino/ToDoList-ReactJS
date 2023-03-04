@@ -43,6 +43,12 @@
   font-size: 0.875rem;
   cursor: pointer;
   font-weight: bold;
+
+  transition: 0.3s;
+}
+
+.adicionarTask > button:hover {
+  background: var(--blue);
 }
 
 .resumoTask {
@@ -75,6 +81,20 @@
   flex-direction: row;
   gap: 0.5rem;
 }
+
+.criadas span,
+.concluidas span {
+  background: var(--gray-400);
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-200);
+  width: auto;
+  padding: 0 0.5rem;
+}
+
 
 .criadas p {
   color: var(--blue);
