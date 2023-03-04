@@ -7,17 +7,44 @@ import "./global.css";
 import "./taskForm.css";
 
 export function App() {
+  const [tasks, setTasks] = useState(["Task dahora em"]);
+
+  const [newTaskText, setNewTaskText] = useState("");
+
+  function handleCreateNewTask() {
+    event.preventDefault();
+
+    setTasks([...tasks, newTaskText]);
+    setNewTaskText("");
+  }
+
+  function handleNewTaskChange() {
+    event.target.setCustomValidity("");
+    setNewTaskText(event.target.value);
+  }
+
+  function deleteTask(taskToDelete) {
+    const tasksWithOutDeletedOne = tasks.filter((task) => {
+      return task != taskToDelete;
+    });
+
+    setTasks(tasksWithOutDeletedOne);
+  }
+
   return (
     <div>
       <header>
         <Header />
       </header>
 
-      <form class="adicionarTask">
+      <form class="adicionarTask" onSubmit={handleCreateNewTask}>
         <input
           class="inputTask"
           type="text"
           placeholder="Adicione uma nova tarefa"
+          onChange={handleNewTaskChange}
+          value={newTaskText}
+          required
         />
         <button class="botaoEnviar" type="submit">
           {" "}
@@ -27,19 +54,19 @@ export function App() {
 
       <div class="resumoTask">
         <div class="statusTask">
-          <div class = "criadas">
+          <div class="criadas">
             <p>Tarefas Criadas</p> 0
           </div>
 
-          <div class = "concluidas">
+          <div class="concluidas">
             <p>Concluídas</p> 0
           </div>
         </div>
 
         <div class="listaTask">
-
-          <Task author="Caio" />
-          <Task author="Tevez" />
+          {tasks.map((task) => {
+            return <Task key={task} content={task} onDeleteTask={deleteTask} />;
+          })}
         </div>
       </div>
     </div>

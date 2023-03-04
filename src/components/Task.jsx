@@ -1,14 +1,20 @@
 import { Circle, Trash } from "phosphor-react";
-import styles from './Task.module.css'
+import styles from "./Task.module.css";
 
-export function Task(props) {
-  console.log(props);
+export function Task({ content, onDeleteTask }) {
+  function handleDeleteTask() {
+    onDeleteTask(content);
+  }
 
   return (
     <div className={styles.task}>
-      <button><Circle/></button>
-      <p>Essa é uma task do {props.author}</p>
-      <button><Trash/></button>
+      <button>
+        <Circle size={16} />
+      </button>
+      <p>{content}</p>
+      <button onMouseDown={handleDeleteTask}>
+        <Trash size={16} />
+      </button>
     </div>
   );
 }
