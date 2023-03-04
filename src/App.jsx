@@ -1,20 +1,29 @@
-import { PlusCircle } from "phosphor-react";
+import { CheckCircle, CircleDashed, PlusCircle } from "phosphor-react";
 import { useState } from "react";
 import { Header } from "./components/Header";
 // import reactLogo from './assets/react.svg'
 import { Task } from "./components/Task";
+import styles from "./App.module.css";
+import { v4 as uuidv4 } from "uuid";
 import "./global.css";
 import "./taskForm.css";
 
 export function App() {
-  const [tasks, setTasks] = useState(["Task dahora em"]);
+  const [tasks, setTasks] = useState([]);
+  const [taskState, setTaskState] = useState(false);
 
   const [newTaskText, setNewTaskText] = useState("");
 
   function handleCreateNewTask() {
     event.preventDefault();
 
-    setTasks([...tasks, newTaskText]);
+    const newTask = {
+      id: Math.random(),
+      content: newTaskText,
+      isComplete: false,
+    };
+
+    setTasks([...tasks, newTask]);
     setNewTaskText("");
   }
 
@@ -23,12 +32,20 @@ export function App() {
     setNewTaskText(event.target.value);
   }
 
-  function deleteTask(taskToDelete) {
+  function deleteTask(id) {
     const tasksWithOutDeletedOne = tasks.filter((task) => {
-      return task != taskToDelete;
+      return task.id !== id;
     });
 
     setTasks(tasksWithOutDeletedOne);
+  }
+
+  function CompleteTask() {
+    if (taskState == false) {
+      setTaskState(true);
+    } else {
+      setTaskState(false);
+    }
   }
 
   return (
@@ -55,17 +72,26 @@ export function App() {
       <div class="resumoTask">
         <div class="statusTask">
           <div class="criadas">
-            <p>Tarefas Criadas</p> 0
+            <p>Tarefas Criadas</p> <span>{tasks.length}</span>
           </div>
 
           <div class="concluidas">
-            <p>Concluídas</p> 0
+            <p>Concluídas</p> <span> 0 de {tasks.length}</span>
           </div>
         </div>
 
-        <div class="listaTask">
+        <div>
           {tasks.map((task) => {
-            return <Task key={task} content={task} onDeleteTask={deleteTask} />;
+            return (
+              <Task
+                key={task.id}
+                id={task.id}
+                content={task.content}
+                isComplete={task.isComplete}
+                onDeleteTask={deleteTask}
+                onCompleteTask={CompleteTask}
+              />
+            );
           })}
         </div>
       </div>

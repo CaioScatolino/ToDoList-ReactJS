@@ -25,3 +25,12 @@
     border-radius: 0.5rem;
     line-height: 0;
 }
+
+.pendingTask {
+  color: var(--gray-100);
+}
+
+.concludedTask {
+  color: var(--gray-300);
+  text-decoration-line: line-through;
+}
