@@ -40,12 +40,11 @@ export function App() {
     setTasks(tasksWithOutDeletedOne);
   }
 
-  function CompleteTask() {
-    if (taskState == false) {
-      setTaskState(true);
-    } else {
-      setTaskState(false);
-    }
+  function CompleteTask(id) {
+    const newTasks = tasks.map((task) =>
+      task.id === id ? { ...task, isComplete: !task.isComplete } : task
+    );
+    setTasks(newTasks)
   }
 
   return (
