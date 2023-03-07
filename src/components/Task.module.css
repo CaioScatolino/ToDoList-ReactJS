@@ -16,6 +16,12 @@
   border-radius: 0.5rem;
   margin: 1rem 0;
   transition: 0.1s;
+  
+}
+
+.task p {
+  word-wrap: break-word;
+  text-align: justify;
 }
 
 .task:hover {
